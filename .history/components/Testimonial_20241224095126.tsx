@@ -10,7 +10,7 @@ export function Testimonial({ quote, author, title }: TestimonialProps) {
   return (
     <Card className="bg-white dark:bg-gray-800">
       <CardContent className="p-6">
-        <p className="text-gray-700 dark:text-gray-300 italic mb-4">&quot;{quote}&quot;</p>
+        <p className="text-gray-700 dark:text-gray-300 italic mb-4">"{quote}"</p>
         <div className="flex items-center">
           <div className="w-12 h-12 bg-purple-500 rounded-full mr-4"></div>
           <div>
@@ -22,3 +22,4 @@ export function Testimonial({ quote, author, title }: TestimonialProps) {
     </Card>
   )
 }
+

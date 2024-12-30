@@ -1,8 +1,10 @@
 'use client'
 
-import { AmbientLight, MeshDistortMaterial, Sphere, SpotLight } from '@react-three/drei'
-import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { PointLight } from '@react-three/drei'
+import { ambientLight } from '@react-three/fiber'
+import { Sphere, MeshDistortMaterial } from '@react-three/drei'
 
 function AnimatedSphereInner() {
   const meshRef = useRef<THREE.Mesh>(null)
@@ -28,10 +30,11 @@ function AnimatedSphereInner() {
 
 export default function AnimatedSphere() {
   return (
-      <Canvas>
+      <>
         <AmbientLight intensity={0.5} />
-        <SpotLight position={[10, 10, 10]} />
+        <PointLight position={[10, 10, 10]} />
         <AnimatedSphereInner />
+      </>
     </Canvas>
   )
 }

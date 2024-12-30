@@ -1,13 +1,13 @@
 'use client'
 
-import { motion, useSpring } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { motion, useSpring } from 'framer-motion'
 
 export default function AnimatedCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isClient, setIsClient] = useState(false)
 
-  const smoothMouse = useSpring(mousePosition, { stiffness: 300, damping: 30 })
+  const smoothMouse = useSpring(mousePosition)
 
   useEffect(() => {
     setIsClient(true)
@@ -34,3 +34,4 @@ export default function AnimatedCursor() {
     />
   )
 }
+

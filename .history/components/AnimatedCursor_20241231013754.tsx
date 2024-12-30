@@ -7,7 +7,7 @@ export default function AnimatedCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isClient, setIsClient] = useState(false)
 
-  const smoothMouse = useSpring(mousePosition, { stiffness: 300, damping: 30 })
+  const smoothMouse = useSpring(mousePosition)
 
   useEffect(() => {
     setIsClient(true)
