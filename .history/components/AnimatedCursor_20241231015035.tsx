@@ -7,8 +7,8 @@ export default function AnimatedCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isClient, setIsClient] = useState(false)
 
-  const smoothMouseX: MotionValue<number> = useSpring(0, { stiffness: 300, damping: 30 })
-  const smoothMouseY: MotionValue<number> = useSpring(0, { stiffness: 300, damping: 30 })
+  const smoothMouseX: MotionValue<number> = useSpring(mousePosition.x, { stiffness: 300, damping: 30 })
+  const smoothMouseY: MotionValue<number> = useSpring(mousePosition.y, { stiffness: 300, damping: 30 })
 
   useEffect(() => {
     setIsClient(true)
@@ -20,11 +20,6 @@ export default function AnimatedCursor() {
     return () => window.removeEventListener('mousemove', updateMousePosition)
   }, [])
 
-  useEffect(() => {
-    smoothMouseX.set(mousePosition.x)
-    smoothMouseY.set(mousePosition.y)
-  }, [mousePosition, smoothMouseX, smoothMouseY])
-
   if (!isClient) return null
 
   return (
@@ -33,6 +28,9 @@ export default function AnimatedCursor() {
       style={{
         x: smoothMouseX,
         y: smoothMouseY,
+        width: 20,
+        height: 20,
+        backgroundColor: 'rgba(124, 58, 237, 0.5)',
       }}
     />
   )

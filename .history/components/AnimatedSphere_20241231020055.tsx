@@ -6,7 +6,9 @@ import { useRef } from 'react'
 import * as THREE from 'three'
 
 function AnimatedSphereInner() {
-  const meshRef = useRef<THREE.Mesh>(null)
+  // Sửa kiểu khai báo cho meshRef
+  const meshRef = useRef<THREE.Mesh | null>(null)
+  
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.2
@@ -30,8 +32,10 @@ function AnimatedSphereInner() {
 export default function AnimatedSphere() {
   return (
     <Canvas>
-      {/* <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} /> */}
+      <ambientLight intensity={0.5} />
+      {/* Thêm directional light để tăng độ sáng */}
+      <directionalLight position={[5, 5, 5]} intensity={1} />
+      <pointLight position={[10, 10, 10]} />
       <AnimatedSphereInner />
     </Canvas>
   )

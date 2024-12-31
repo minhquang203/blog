@@ -30,8 +30,9 @@ function AnimatedSphereInner() {
 export default function AnimatedSphere() {
   return (
     <Canvas>
-      {/* <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} /> */}
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[5, 5, 5]} intensity={1} />
+      <pointLight position={[10, 10, 10]} />
       <AnimatedSphereInner />
     </Canvas>
   )
