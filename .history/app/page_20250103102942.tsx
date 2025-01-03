@@ -203,7 +203,7 @@ export default function Home() {
               },
               {
                 icon: Mail,
-                href: "tranminhquang082003@gmail.com",
+                href: "mailto:contact@example.com",
                 label: "Email",
               },
               { icon: Globe, href: "https://example.com", label: "Website" },
