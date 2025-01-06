@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 interface NavbarProps {
@@ -14,13 +14,14 @@ interface NavbarProps {
 export function Navbar({ activeSection, setActiveSection }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const pathname = usePathname()
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
-    { name: 'Blog', href: '/blog' }, // Thêm liên kết Blog
+    { name: 'Trang chủ', href: '/' },
+    { name: 'Kỹ năng', href: '/#skills' },
+    { name: 'Dự án', href: '/#projects' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Liên hệ', href: '/#contact' },
   ]
 
   useEffect(() => {
@@ -31,6 +32,12 @@ export function Navbar({ activeSection, setActiveSection }: NavbarProps) {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const isActive = (item: { name: string; href: string }) => {
+    if (item.href === '/') return pathname === '/'
+    if (item.href === '/blog') return pathname.startsWith('/blog')
+    return activeSection === item.name.toLowerCase()
+  }
 
   return (
     <motion.nav
@@ -44,7 +51,7 @@ export function Navbar({ activeSection, setActiveSection }: NavbarProps) {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <motion.a
-            href="#"
+            href="/"
             className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent"
             whileHover={{ scale: 1.05 }}
           >
@@ -54,18 +61,19 @@ export function Navbar({ activeSection, setActiveSection }: NavbarProps) {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link key={item.name} href={item.href} legacyBehavior>
-                <a
-                  className={`text-sm font-medium transition-colors ${
-                    activeSection === item.name.toLowerCase()
-                      ? 'text-purple-500'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400'
-                  }`}
-                  onClick={() => setActiveSection(item.name.toLowerCase())}
-                >
-                  {item.name}
-                </a>
-              </Link>
+              <motion.a
+                key={item.name}
+                href={item.href}
+                className={`text-sm font-medium transition-colors ${
+                  isActive(item)
+                    ? 'text-purple-500'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400'
+                }`}
+                whileHover={{ scale: 1.1 }}
+                onClick={() => item.href.startsWith('/#') && setActiveSection(item.name.toLowerCase())}
+              >
+                {item.name}
+              </motion.a>
             ))}
           </div>
 
@@ -94,21 +102,21 @@ export function Navbar({ activeSection, setActiveSection }: NavbarProps) {
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navItems.map((item) => (
-              <Link key={item.name} href={item.href} legacyBehavior>
-                <a
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${
-                    activeSection === item.name.toLowerCase()
-                      ? 'text-purple-500 bg-purple-50 dark:bg-purple-900/20'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400'
-                  }`}
-                  onClick={() => {
-                    setActiveSection(item.name.toLowerCase())
-                    setIsOpen(false)
-                  }}
-                >
-                  {item.name}
-                </a>
-              </Link>
+              <a
+                key={item.name}
+                href={item.href}
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  isActive(item)
+                    ? 'text-purple-500 bg-purple-50 dark:bg-purple-900/20'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400'
+                }`}
+                onClick={() => {
+                  if (item.href.startsWith('/#')) setActiveSection(item.name.toLowerCase())
+                  setIsOpen(false)
+                }}
+              >
+                {item.name}
+              </a>
             ))}
           </div>
         </motion.div>
@@ -116,3 +124,4 @@ export function Navbar({ activeSection, setActiveSection }: NavbarProps) {
     </motion.nav>
   )
 }
+

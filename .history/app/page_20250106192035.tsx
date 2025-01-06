@@ -17,7 +17,7 @@ import {
   Moon,
   Server,
   Sparkles,
-  Sun,
+  Sun
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -32,7 +32,7 @@ const AnimatedCursor = dynamic(() => import("@/components/AnimatedCursor"), {
 });
 
 export default function Home() {
-  const [theme, setTheme] = useState("light"); // Mặc định là light theme
+  const [theme, setTheme] = useState("dark");
   const [activeSection, setActiveSection] = useState("home");
 
   const skills = [
@@ -44,9 +44,9 @@ export default function Home() {
     {
       title: "HomeStayMove",
       description: "Dự án Book phòng thuê nhà",
-      image: "/slide.jpg?height=400&width=600",
+      image: "/slide.jpg?height=400&width=600", // Đảm bảo rằng bạn đã đặt hình ảnh này trong thư mục public
       tags: ["React.js", "Node.js", "MongoDB"],
-      link: "https://homestaymove.example.com",
+      link: "https://homestaymove.example.com", // Thay thế bằng liên kết thực tế của dự án
       featured: true,
     },
   ];
@@ -64,7 +64,6 @@ export default function Home() {
       <Navbar
         activeSection={activeSection}
         setActiveSection={setActiveSection}
-        sections={["Home", "Skills", "Projects", "Contact", "Blog"]} // Thêm "Blog" vào Navbar
       />
 
       {/* Hero Section */}
@@ -104,7 +103,7 @@ export default function Home() {
               Trần Minh Quang
             </motion.h1>
             <motion.p
-              className="text-xl mb-8 text-gray-700 dark:text-gray-300" // Màu chữ phù hợp với nền sáng
+              className="text-xl mb-8 text-gray-600 dark:text-gray-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
@@ -138,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <section id="skills" className="py-20 bg-white dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-4xl font-bold text-center mb-16"
@@ -157,7 +156,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-white dark:bg-gray-800">
+      <section id="projects" className="py-20">
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-4xl font-bold text-center mb-16"
@@ -176,7 +175,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <section id="contact" className="py-20 bg-white dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-4xl font-bold text-center mb-16"
@@ -197,8 +196,16 @@ export default function Home() {
           >
             {[
               { icon: Github, href: "https://github.com/minhquang203", label: "GitHub" },
-              { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-              { icon: Mail, href: "tranminhquang082003@gmail.com", label: "Email" },
+              {
+                icon: Linkedin,
+                href: "https://linkedin.com",
+                label: "LinkedIn",
+              },
+              {
+                icon: Mail,
+                href: "tranminhquang082003@gmail.com",
+                label: "Email",
+              },
               { icon: Globe, href: "https://example.com", label: "Website" },
             ].map((item, index) => (
               <motion.a
@@ -218,29 +225,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Blog Section */}
-      <section id="blog" className="py-20 bg-white dark:bg-gray-800">
-        <div className="container mx-auto px-4">
-          <motion.h2
-            className="text-4xl font-bold text-center mb-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            Blog
-          </motion.h2>
-          <motion.p
-            className="text-xl text-center text-gray-700 dark:text-gray-300"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            Chia sẻ kiến thức và kinh nghiệm về lập trình.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Theme Toggle Button */}
       <Button
         className="fixed bottom-4 right-4 rounded-full p-2"
         variant="outline"

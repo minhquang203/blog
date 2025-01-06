@@ -14,10 +14,8 @@ import {
   Globe,
   Linkedin,
   Mail,
-  Moon,
   Server,
   Sparkles,
-  Sun,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -32,7 +30,6 @@ const AnimatedCursor = dynamic(() => import("@/components/AnimatedCursor"), {
 });
 
 export default function Home() {
-  const [theme, setTheme] = useState("light"); // Mặc định là light theme
   const [activeSection, setActiveSection] = useState("home");
 
   const skills = [
@@ -51,20 +48,12 @@ export default function Home() {
     },
   ];
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-    document.documentElement.classList.toggle("dark");
-  };
-
   return (
-    <div
-      className={`min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white transition-colors duration-300 ${theme}`}
-    >
+    <div className="min-h-screen bg-gray-900 text-white">
       <AnimatedCursor />
       <Navbar
         activeSection={activeSection}
         setActiveSection={setActiveSection}
-        sections={["Home", "Skills", "Projects", "Contact", "Blog"]} // Thêm "Blog" vào Navbar
       />
 
       {/* Hero Section */}
@@ -92,7 +81,7 @@ export default function Home() {
                 alt="Profile"
                 width={200}
                 height={200}
-                className="rounded-full relative z-10 border-4 border-white dark:border-gray-800"
+                className="rounded-full relative z-10 border-4 border-gray-800"
               />
             </motion.div>
             <motion.h1
@@ -104,7 +93,7 @@ export default function Home() {
               Trần Minh Quang
             </motion.h1>
             <motion.p
-              className="text-xl mb-8 text-gray-700 dark:text-gray-300" // Màu chữ phù hợp với nền sáng
+              className="text-xl mb-8 text-gray-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
@@ -138,7 +127,7 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <section id="skills" className="py-20 bg-gray-800">
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-4xl font-bold text-center mb-16"
@@ -157,7 +146,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-white dark:bg-gray-800">
+      <section id="projects" className="py-20 bg-gray-900">
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-4xl font-bold text-center mb-16"
@@ -176,7 +165,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <section id="contact" className="py-20 bg-gray-800">
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-4xl font-bold text-center mb-16"
@@ -197,8 +186,16 @@ export default function Home() {
           >
             {[
               { icon: Github, href: "https://github.com/minhquang203", label: "GitHub" },
-              { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-              { icon: Mail, href: "tranminhquang082003@gmail.com", label: "Email" },
+              {
+                icon: Linkedin,
+                href: "https://linkedin.com",
+                label: "LinkedIn",
+              },
+              {
+                icon: Mail,
+                href: "tranminhquang082003@gmail.com",
+                label: "Email",
+              },
               { icon: Globe, href: "https://example.com", label: "Website" },
             ].map((item, index) => (
               <motion.a
@@ -206,7 +203,7 @@ export default function Home() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-icon p-3 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-purple-100 dark:hover:bg-purple-900 transition-colors"
+                className="social-icon p-3 rounded-full bg-gray-700 hover:bg-purple-900 transition-colors"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -217,42 +214,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
-      {/* Blog Section */}
-      <section id="blog" className="py-20 bg-white dark:bg-gray-800">
-        <div className="container mx-auto px-4">
-          <motion.h2
-            className="text-4xl font-bold text-center mb-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            Blog
-          </motion.h2>
-          <motion.p
-            className="text-xl text-center text-gray-700 dark:text-gray-300"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            Chia sẻ kiến thức và kinh nghiệm về lập trình.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Theme Toggle Button */}
-      <Button
-        className="fixed bottom-4 right-4 rounded-full p-2"
-        variant="outline"
-        size="icon"
-        onClick={toggleTheme}
-      >
-        {theme === "dark" ? (
-          <Sun className="h-5 w-5" />
-        ) : (
-          <Moon className="h-5 w-5" />
-        )}
-      </Button>
     </div>
   );
 }

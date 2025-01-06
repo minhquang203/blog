@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255; /* Màu trắng */
+    --foreground: 30 30 30; /* Màu đen nhạt */
+    --card: 255 255 255; /* Màu trắng */
+    --card-foreground: 30 30 30; /* Màu đen nhạt */
+    --popover: 255 255 255; /* Màu trắng */
+    --popover-foreground: 30 30 30; /* Màu đen nhạt */
+    --primary: 79 70 229; /* Màu tím đậm */
+    --primary-foreground: 255 255 255; /* Màu trắng */
+    --secondary: 210 40% 96.1%; /* Màu xám nhạt */
+    --secondary-foreground: 30 30 30; /* Màu đen nhạt */
+    --muted: 210 40% 96.1%; /* Màu xám nhạt */
+    --muted-foreground: 160 160 160; /* Màu xám */
+    --accent: 210 40% 96.1%; /* Màu xám nhạt */
+    --accent-foreground: 30 30 30; /* Màu đen nhạt */
+    --destructive: 0 84.2% 60.2%; /* Màu đỏ */
+    --destructive-foreground: 255 255 255; /* Màu trắng */
+    --border: 214.3 31.8% 91.4%; /* Màu viền nhạt */
+    --input: 214.3 31.8% 91.4%; /* Màu viền nhạt */
+    --ring: 79 70 229; /* Màu tím đậm */
+    --radius: 0.5rem; /* Bo góc */
+  }
+
+  .dark {
+    --background: 30 30 30; /* Màu đen nhạt */
+    --foreground: 255 255 255; /* Màu trắng */
+    --card: 30 30 30; /* Màu đen nhạt */
+    --card-foreground: 255 255 255; /* Màu trắng */
+    --popover: 30 30 30; /* Màu đen nhạt */
+    --popover-foreground: 255 255 255; /* Màu trắng */
+    --primary: 99 102 241; /* Màu tím nhạt */
+    --primary-foreground: 255 255 255; /* Màu trắng */
+    --secondary: 217.2 32.6% 17.5%; /* Màu xám đậm */
+    --secondary-foreground: 255 255 255; /* Màu trắng */
+    --muted: 217.2 32.6% 17.5%; /* Màu xám đậm */
+    --muted-foreground: 160 160 160; /* Màu xám */
+    --accent: 217.2 32.6% 17.5%; /* Màu xám đậm */
+    --accent-foreground: 255 255 255; /* Màu trắng */
+    --destructive: 0 62.8% 30.6%; /* Màu đỏ đậm */
+    --destructive-foreground: 255 255 255; /* Màu trắng */
+    --border: 217.2 32.6% 17.5%; /* Màu viền đậm */
+    --input: 217.2 32.6% 17.5%; /* Màu viền đậm */
+    --ring: 99 102 241; /* Màu tím nhạt */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border; /* Áp dụng màu viền */
+  }
+
+  body {
+    @apply bg-background text-foreground; /* Màu nền và chữ */
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Gradient animations */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800; /* Màu nền thanh cuộn */
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-purple-300 dark:bg-purple-600 rounded-full; /* Màu thanh cuộn */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-purple-400 dark:bg-purple-500; /* Màu thanh cuộn khi hover */
+}
+
+/* Card hover effects */
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  @apply shadow-lg bg-purple-50 dark:bg-purple-900; /* Màu nền khi hover */
+}
+
+/* Skill card hover effects */
+.skill-card {
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+  @apply transform scale-105 bg-purple-50 dark:bg-purple-900; /* Màu nền khi hover */
+}
+
+/* Timeline styles */
+.timeline-dot {
+  @apply w-4 h-4 rounded-full bg-purple-500; /* Màu chấm timeline */
+}
+
+.timeline-line {
+  @apply w-0.5 h-full bg-purple-300; /* Màu đường timeline */
+}
+
+/* Contact form focus states */
+.contact-input:focus {
+  @apply ring-2 ring-purple-500 ring-offset-2 ring-offset-background; /* Màu focus */
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-3xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
+/* Accessibility focus styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-background; /* Màu focus */
+}
+
+/* Dark mode transitions */
+.dark-mode-transition {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom selection color */
+::selection {
+  @apply bg-purple-500 text-white; /* Màu khi chọn văn bản */
+}
+
+/* Image hover effects */
+.image-hover {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.image-hover:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Button hover effects */
+.button-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-hover:hover {
+  transform: translateY(-2px);
+  @apply shadow-md bg-purple-500 text-white; /* Màu nút khi hover */
+}
+
+/* Section transitions */
+.section-transition {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Testimonial card styles */
+.testimonial-card {
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Map container styles */
+.map-container {
+  @apply rounded-lg overflow-hidden shadow-lg;
+  height: 400px;
+}
+
+/* Social icons hover effects */
+.social-icon {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.social-icon:hover {
+  @apply text-purple-500; /* Màu icon khi hover */
+  transform: scale(1.2);
+}
