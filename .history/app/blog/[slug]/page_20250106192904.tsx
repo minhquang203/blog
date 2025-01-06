@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 
   
 
-const blogPosts :{ [key: string]: { title: string; content: string; date: string; image: string; tags: string[] } }= {
+const blogPosts = {
   "gioi-thieu-javascript": {
     title: "Giới thiệu về JavaScript cho người mới bắt đầu",
     content: `

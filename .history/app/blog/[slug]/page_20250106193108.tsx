@@ -2,10 +2,20 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-
+interface BlogPost {
+    title: string;
+    content: string;
+    date: string;
+    image: string;
+    tags: string[];
+  }
+  
+  interface BlogPosts {
+    [key: string]: BlogPost; // Index signature
+  }
   
 
-const blogPosts :{ [key: string]: { title: string; content: string; date: string; image: string; tags: string[] } }= {
+const blogPosts = {
   "gioi-thieu-javascript": {
     title: "Giới thiệu về JavaScript cho người mới bắt đầu",
     content: `
@@ -240,42 +250,42 @@ app.listen(3000, () => {
 };
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = blogPosts[params.slug];
-
-  if (!post) {
-    notFound();
-  }
-
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <article className="max-w-4xl mx-auto">
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {post.tags?.map((tag) => (
-              <Badge
-                key={tag}
-                variant="secondary"
-                className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100"
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-          <p className="text-gray-500 mb-8">{post.date}</p>
-          <Image
-            src={post.image}
-            alt={post.title}
-            width={800}
-            height={400}
-            className="rounded-lg mb-8 object-cover w-full"
+    const post = blogPosts[params.slug]; // Truy cập bài viết bằng slug
+  
+    if (!post) {
+      notFound(); // Trả về trang 404 nếu bài viết không tồn tại
+    }
+  
+    return (
+      <div className="container mx-auto px-4 py-16">
+        <article className="max-w-4xl mx-auto">
+          <header className="mb-8">
+            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {post.tags?.map((tag) => (
+                <Badge
+                  key={tag}
+                  variant="secondary"
+                  className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100"
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+            <p className="text-gray-500 mb-8">{post.date}</p>
+            <Image
+              src={post.image}
+              alt={post.title}
+              width={800}
+              height={400}
+              className="rounded-lg mb-8 object-cover w-full"
+            />
+          </header>
+          <div
+            className="prose dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: post.content }}
           />
-        </header>
-        <div
-          className="prose dark:prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-      </article>
-    </div>
-  );
-}
+        </article>
+      </div>
+    );
+  }

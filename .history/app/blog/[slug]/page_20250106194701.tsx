@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 
   
 
-const blogPosts :{ [key: string]: { title: string; content: string; date: string; image: string; tags: string[] } }= {
+const blogPosts = {
   "gioi-thieu-javascript": {
     title: "Giới thiệu về JavaScript cho người mới bắt đầu",
     content: `
@@ -240,7 +240,7 @@ app.listen(3000, () => {
 };
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = blogPosts[params.slug];
+//   const post = blogPosts[params.slug];
 
   if (!post) {
     notFound();

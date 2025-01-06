@@ -1,11 +1,22 @@
 import { Badge } from "@/components/ui/badge";
+import { PageProps } from "next"; // Import kiểu dữ liệu PageProps từ Next.js
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+interface BlogPost {
+  title: string;
+  content: string;
+  date: string;
+  image: string;
+  tags: string[];
+}
 
+interface BlogPosts {
+  [key: string]: BlogPost; // Index signature
+}
   
 
-const blogPosts :{ [key: string]: { title: string; content: string; date: string; image: string; tags: string[] } }= {
+const blogPosts = {
   "gioi-thieu-javascript": {
     title: "Giới thiệu về JavaScript cho người mới bắt đầu",
     content: `
@@ -239,8 +250,13 @@ app.listen(3000, () => {
   },
 };
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = blogPosts[params.slug];
+interface PageProps {
+    params: {
+      slug: string; // Định nghĩa rõ ràng kiểu dữ liệu cho params
+    };
+  }
+export default function BlogPost({ params }: PageProps) {
+    const post = blogPosts[params.slug]; // Truy cập bài viết bằng slug
 
   if (!post) {
     notFound();

@@ -2,10 +2,18 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+interface BlogPost {
+    title: string;
+    content: string;
+    date: string;
+    image: string;
+    tags: string[];
+  }
+  interface BlogPosts {
+    [key: string]: BlogPost; // Index signature
+  }
 
-  
-
-const blogPosts :{ [key: string]: { title: string; content: string; date: string; image: string; tags: string[] } }= {
+const blogPosts = {
   "gioi-thieu-javascript": {
     title: "Giới thiệu về JavaScript cho người mới bắt đầu",
     content: `
